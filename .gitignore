@@ -1,0 +1,4 @@
+digdag/log/*
+!digdag/log/.keep
+postgres/data/*
+!postgres/data/.keep

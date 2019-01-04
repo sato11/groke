@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_GPASSWORD: p@ssw0rd42
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+
+  embulk:
+    build: ./embulk
+    volumes:
+      - ./embulk:/embulk
+
+  digdag:
+    build: ./digdag
+    ports:
+      - '65432:65432'
+    volumes:
+      - ./digdag/log:/digdag/log
+    depends_on:
+      - postgres
