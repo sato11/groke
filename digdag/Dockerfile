@@ -1,9 +1,10 @@
 FROM openjdk:8-jdk-alpine
 WORKDIR /digdag
 RUN apk --update add && \
-    apk add curl postgresql-client
+    apk add curl postgresql-client docker
 RUN curl --create-dirs -o /usr/local/bin/digdag -L "https://dl.digdag.io/digdag-latest" && \
     chmod +x /usr/local/bin/digdag
-COPY ./server.properties /digdag/server.properties
+COPY . /digdag
 EXPOSE 65432
-CMD digdag server -c server.properties -A log/accesslogs -O log/tasklogs -L log/server.log
+ENTRYPOINT [ "java", "-jar", "/usr/local/bin/digdag" ]
+CMD [ "server", "-c", "server.properties", "-A", "/digdag/log/accesslogs", "-O", "/digdag/log/tasklogs", "-L", "/digdag/log/server.log" ]

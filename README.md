@@ -7,5 +7,5 @@ The name Groke is taken from one of Moominvalley's residents.
 ## Run
 ```
 $ docker-compose build
-$ docker-compose up -d
+$ docker-compose run digdag run sample.dig
 ```

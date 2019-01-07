@@ -1,0 +1,17 @@
+timezone: Asia/Tokyo
+
+_export:
+  docker:
+    image: groke_embulk
+
++setup:
+  echo>: start ${session_time}
+
++main:
+  +preview:
+    sh>: embulk preview /embulk/config.yml
+  +run:
+    sh>: embulk run /embulk/config.yml
+
++teardown:
+  echo>: finish ${session_time}

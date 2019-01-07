@@ -10,14 +10,14 @@ services:
 
   embulk:
     build: ./embulk
-    volumes:
-      - ./embulk:/embulk
 
   digdag:
     build: ./digdag
     ports:
       - '65432:65432'
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
       - ./digdag/log:/digdag/log
     depends_on:
       - postgres
